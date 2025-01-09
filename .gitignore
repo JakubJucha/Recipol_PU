@@ -400,54 +400,43 @@ FodyWeavers.xsd
 
 # Dodatkowe wpisy dla frontendu
 
-# Angular-specific
-node_modules/
-dist/
-out-tsc/
-coverage/
-.angular/
-.angular-cli.json
-.editorconfig
+# Compiled output
+/dist
+/tmp
+/out-tsc
+/bazel-out
 
-# Angular-generated files
-*.ngsummary.json
-*.ngfactory.ts
-*.ngstyle.ts
-*.ngsummary.ts
+# Node
+/node_modules
+npm-debug.log
+yarn-error.log
 
-# WebStorm-specific
+# IDEs and editors
 .idea/
-*.iml
-*.log
-.DS_Store
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
 
-# TypeScript-specific
-*.tsbuildinfo
-
-# Logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-lerna-debug.log*
-
-# Environment files
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# Package managers
-package-lock.json
-yarn.lock
-pnpm-lock.yaml
-
-# Temporary files
-*.tmp
-*.swp
-
-# Local history for WebStorm
-.localhistory/
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
 
 # Miscellaneous
-.history/
+/.angular/cache
+.sass-cache/
+/connect.lock
+/coverage
+/libpeerconnection.log
+testem.log
+/typings
+
+# System files
+.DS_Store
+Thumbs.db
