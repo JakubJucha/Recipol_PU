@@ -15,7 +15,7 @@
 
 # Mono auto generated files
 mono_crash.*
-
+appsettings.json
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
@@ -440,3 +440,5 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+RecipolApi/RecipolApi/appsettings.json
+RecipolApi/RecipolApi/appsettings.json
