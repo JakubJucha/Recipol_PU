@@ -1,0 +1,13 @@
+.custom-navbar {
+  background-color: #34d399 !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1;
+  width: 100vw !important;
+  color: floralwhite !important;
+}
+
+.p-menubar-item-link {
+  color: floralwhite !important;
+}
+

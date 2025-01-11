@@ -1,0 +1,58 @@
+<div class="register-wrapper">
+  <form [formGroup]="form" (submit)="register()">
+    <div class="form-container">
+      <h1>Zarejestruj się</h1>
+      <span>Masz już konto? <a [routerLink]="'/login'">Zaloguj się</a></span>
+      <div class="form-fields">
+        <div class="row">
+          <div class="col-lg-6">
+            <p-floatlabel variant="on">
+              <input pInputText id="name" type="text" formControlName="name" />
+              <label for="name">Imię</label>
+            </p-floatlabel>
+          </div>
+          <div class="col-lg-6">
+            <p-floatlabel variant="on">
+              <input pInputText id="surname" type="text" formControlName="surname" />
+              <label for="surname">Nazwisko</label>
+            </p-floatlabel>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <p-floatlabel variant="on">
+            <input pInputText id="email" type="email" formControlName="email" email />
+            <label for="email">Adres email</label>
+            </p-floatlabel>
+          </div>
+        </div>
+        <p-floatlabel variant="on">
+          <p-password
+            [inputStyle]="{'width':'100%'}"
+            [style]="{'width':'100%'}"
+            id="password"
+            formControlName="password"
+            [feedback]="false"
+            [ngClass]="{'ng-invalid': form.hasError('passwordMismatch') && form.get('repeatPassword')?.touched, 'ng-dirty': form.get('password')?.dirty}"
+            [toggleMask]="true" />
+          <label for="password">Hasło</label>
+        </p-floatlabel>
+        <p-floatlabel variant="on">
+          <p-password
+            [inputStyle]="{'width':'100%'}"
+            [style]="{'width':'100%'}"
+            id="repeatPassword"
+            formControlName="repeatPassword"
+            [feedback]="false"
+            [ngClass]="{'ng-invalid': form.hasError('passwordMismatch') && form.get('repeatPassword')?.touched, 'ng-dirty': form.get('password')?.dirty}"
+            [toggleMask]="true" />
+          <label for="repeatPassword">Powtórz hasło</label>
+          <div *ngIf="form.hasError('passwordMismatch') && form.get('repeatPassword')?.touched">
+            <small class="error-message">Hasła muszą być takie same</small>
+          </div>
+        </p-floatlabel>
+      </div>
+      <button type="submit" [disabled]="!form.valid" pButton pRipple >Załóż konto <i class="pi pi-check"></i></button>
+    </div>
+  </form>
+</div>

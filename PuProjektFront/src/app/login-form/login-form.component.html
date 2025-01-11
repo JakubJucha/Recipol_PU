@@ -1,0 +1,19 @@
+<div class="login-wrapper">
+  <form [formGroup]="form" (submit)="login()">
+    <div class="form-container">
+      <h1>Zaloguj się</h1>
+      <span>Nie masz jeszcze konta? <a [routerLink]="'/register'">Zarejestruj się</a></span>
+      <div class="form-fields">
+        <p-floatlabel variant="on">
+          <input pInputText id="email" type="email" formControlName="email" email />
+          <label for="email">Adres email</label>
+        </p-floatlabel>
+        <p-floatlabel variant="on">
+          <p-password id="password" formControlName="password" [feedback]="false" [toggleMask]="true" />
+          <label for="password">Hasło</label>
+        </p-floatlabel>
+      </div>
+      <button type="submit" pButton pRipple >Zaloguj się <i class="pi pi-check"></i></button>
+    </div>
+  </form>
+</div>

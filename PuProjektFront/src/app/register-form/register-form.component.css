@@ -1,0 +1,42 @@
+.register-wrapper {
+  background-color: black;
+  width: 40rem;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  border-radius: 1rem;
+  padding-top: 2rem;
+  padding-bottom: 3rem;
+}
+
+.form-container {
+  background-color: black;
+  width: 100%;
+  padding: 2rem;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+span {
+  font-size: 14px;
+  color: gray;
+}
+
+.p-floatlabel {
+  margin-bottom: 1.5rem;
+}
+
+input {
+  width: 100% !important;
+}
+
+a {
+  color: #34d399;
+}
+
+.error-message {
+  font-size: 14px;
+  color: #f87171;
+}
