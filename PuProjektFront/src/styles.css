@@ -3,10 +3,20 @@
 @import "primeicons/primeicons.css";
 @import "bootstrap/dist/css/bootstrap.min.css";
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;  }
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: block;
+  }
 
-main {
-  padding-right: 1.5rem;
-  padding-left: 1.5rem;
+body { margin: 0;
+  font-family: "Times New Roman", "Roboto", sans-serif;  background-color: #18181b; color: floralwhite;  }
+
+
+.router-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 5rem;
+  width: 100%;
 }

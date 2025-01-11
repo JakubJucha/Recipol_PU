@@ -1,20 +1,20 @@
 import {
   NG_VALUE_ACCESSOR
-} from "./chunk-EVHJDCTQ.js";
+} from "./chunk-NQVQM6LC.js";
 import {
   BaseComponent
-} from "./chunk-BJ5WW3MV.js";
+} from "./chunk-UI62FMK4.js";
 import {
   $dt,
   BaseStyle,
   SharedModule
-} from "./chunk-DHWM6FLV.js";
+} from "./chunk-S2YCO6QD.js";
 import {
   CommonModule,
   NgClass,
   NgIf,
   NgStyle
-} from "./chunk-6E2G5MVT.js";
+} from "./chunk-Z4SLCXDG.js";
 import {
   ChangeDetectionStrategy,
   Component,
@@ -53,10 +53,10 @@ import {
   ɵɵtemplate,
   ɵɵtext,
   ɵɵtextInterpolate1
-} from "./chunk-EP4V22QT.js";
+} from "./chunk-IBUPOGGH.js";
 import "./chunk-WDMUDEB6.js";
 
-// node_modules/primeng/fesm2022/primeng-knob.mjs
+// ../../node_modules/primeng/fesm2022/primeng-knob.mjs
 var theme = ({
   dt
 }) => `

@@ -1,7 +1,7 @@
 import {
   CommonModule,
   DOCUMENT
-} from "./chunk-6E2G5MVT.js";
+} from "./chunk-Z4SLCXDG.js";
 import {
   Component,
   Directive,
@@ -30,12 +30,12 @@ import {
   ɵɵprojection,
   ɵɵprojectionDef,
   ɵɵsetNgModuleScope
-} from "./chunk-EP4V22QT.js";
+} from "./chunk-IBUPOGGH.js";
 import {
   __spreadValues
 } from "./chunk-WDMUDEB6.js";
 
-// node_modules/@primeuix/utils/dom/index.mjs
+// ../../node_modules/@primeuix/utils/dom/index.mjs
 function hasClass(element, className) {
   if (element) {
     if (element.classList) return element.classList.contains(className);
@@ -54,6 +54,24 @@ function addClass(element, className) {
     [className].flat().filter(Boolean).forEach((_classNames) => _classNames.split(" ").forEach(fn));
   }
 }
+function getCSSVariableByRegex(variableRegex) {
+  for (const sheet of document == null ? void 0 : document.styleSheets) {
+    try {
+      for (const rule of sheet == null ? void 0 : sheet.cssRules) {
+        for (const property of rule == null ? void 0 : rule.style) {
+          if (variableRegex.test(property)) {
+            return {
+              name: property,
+              value: rule.style.getPropertyValue(property).trim()
+            };
+          }
+        }
+      }
+    } catch (e) {
+    }
+  }
+  return null;
+}
 function removeClass(element, className) {
   if (element && className) {
     const fn = (_className) => {
@@ -61,6 +79,69 @@ function removeClass(element, className) {
       else element.className = element.className.replace(new RegExp("(^|\\b)" + _className.split(" ").join("|") + "(\\b|$)", "gi"), " ");
     };
     [className].flat().filter(Boolean).forEach((_classNames) => _classNames.split(" ").forEach(fn));
+  }
+}
+function getHiddenElementDimensions(element) {
+  let dimensions = {
+    width: 0,
+    height: 0
+  };
+  if (element) {
+    element.style.visibility = "hidden";
+    element.style.display = "block";
+    dimensions.width = element.offsetWidth;
+    dimensions.height = element.offsetHeight;
+    element.style.display = "none";
+    element.style.visibility = "visible";
+  }
+  return dimensions;
+}
+function getViewport() {
+  let win = window, d = document, e = d.documentElement, g = d.getElementsByTagName("body")[0], w = win.innerWidth || e.clientWidth || g.clientWidth, h = win.innerHeight || e.clientHeight || g.clientHeight;
+  return {
+    width: w,
+    height: h
+  };
+}
+function getWindowScrollLeft() {
+  let doc = document.documentElement;
+  return (window.pageXOffset || doc.scrollLeft) - (doc.clientLeft || 0);
+}
+function getWindowScrollTop() {
+  let doc = document.documentElement;
+  return (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
+}
+function absolutePosition(element, target, gutter = true) {
+  var _a, _b, _c, _d;
+  if (element) {
+    const elementDimensions = element.offsetParent ? {
+      width: element.offsetWidth,
+      height: element.offsetHeight
+    } : getHiddenElementDimensions(element);
+    const elementOuterHeight = elementDimensions.height;
+    const elementOuterWidth = elementDimensions.width;
+    const targetOuterHeight = target.offsetHeight;
+    const targetOuterWidth = target.offsetWidth;
+    const targetOffset = target.getBoundingClientRect();
+    const windowScrollTop = getWindowScrollTop();
+    const windowScrollLeft = getWindowScrollLeft();
+    const viewport = getViewport();
+    let top, left, origin = "top";
+    if (targetOffset.top + targetOuterHeight + elementOuterHeight > viewport.height) {
+      top = targetOffset.top + windowScrollTop - elementOuterHeight;
+      origin = "bottom";
+      if (top < 0) {
+        top = windowScrollTop;
+      }
+    } else {
+      top = targetOuterHeight + targetOffset.top + windowScrollTop;
+    }
+    if (targetOffset.left + elementOuterWidth > viewport.width) left = Math.max(0, targetOffset.left + windowScrollLeft + targetOuterWidth - elementOuterWidth);
+    else left = targetOffset.left + windowScrollLeft;
+    element.style.top = top + "px";
+    element.style.left = left + "px";
+    element.style.transformOrigin = origin;
+    gutter && (element.style.marginTop = origin === "bottom" ? `calc(${(_b = (_a = getCSSVariableByRegex(/-anchor-gutter$/)) == null ? void 0 : _a.value) != null ? _b : "2px"} * -1)` : (_d = (_c = getCSSVariableByRegex(/-anchor-gutter$/)) == null ? void 0 : _c.value) != null ? _d : "");
   }
 }
 function getOuterWidth(element, margin) {
@@ -74,8 +155,61 @@ function getOuterWidth(element, margin) {
   }
   return 0;
 }
+function relativePosition(element, target, gutter = true) {
+  var _a, _b, _c, _d;
+  if (element) {
+    const elementDimensions = element.offsetParent ? {
+      width: element.offsetWidth,
+      height: element.offsetHeight
+    } : getHiddenElementDimensions(element);
+    const targetHeight = target.offsetHeight;
+    const targetOffset = target.getBoundingClientRect();
+    const viewport = getViewport();
+    let top, left, origin = "top";
+    if (targetOffset.top + targetHeight + elementDimensions.height > viewport.height) {
+      top = -1 * elementDimensions.height;
+      origin = "bottom";
+      if (targetOffset.top + top < 0) {
+        top = -1 * targetOffset.top;
+      }
+    } else {
+      top = targetHeight;
+    }
+    if (elementDimensions.width > viewport.width) {
+      left = targetOffset.left * -1;
+    } else if (targetOffset.left + elementDimensions.width > viewport.width) {
+      left = (targetOffset.left + elementDimensions.width - viewport.width) * -1;
+    } else {
+      left = 0;
+    }
+    element.style.top = top + "px";
+    element.style.left = left + "px";
+    element.style.transformOrigin = origin;
+    gutter && (element.style.marginTop = origin === "bottom" ? `calc(${(_b = (_a = getCSSVariableByRegex(/-anchor-gutter$/)) == null ? void 0 : _a.value) != null ? _b : "2px"} * -1)` : (_d = (_c = getCSSVariableByRegex(/-anchor-gutter$/)) == null ? void 0 : _c.value) != null ? _d : "");
+  }
+}
 function isElement(element) {
   return typeof HTMLElement === "object" ? element instanceof HTMLElement : element && typeof element === "object" && element !== null && element.nodeType === 1 && typeof element.nodeName === "string";
+}
+function toElement(element) {
+  let target = element;
+  if (element && typeof element === "object") {
+    if (element.hasOwnProperty("current")) {
+      target = element.current;
+    } else if (element.hasOwnProperty("el")) {
+      if (element.el.hasOwnProperty("nativeElement")) {
+        target = element.el.nativeElement;
+      } else {
+        target = element.el;
+      }
+    }
+  }
+  return isElement(target) ? target : void 0;
+}
+function appendChild(element, child) {
+  const target = toElement(element);
+  if (target) target.appendChild(child);
+  else throw new Error("Cannot append " + child + " to " + element);
 }
 function setAttributes(element, attributes = {}) {
   if (isElement(element)) {
@@ -111,8 +245,27 @@ function setAttributes(element, attributes = {}) {
     });
   }
 }
+function fadeIn(element, duration) {
+  if (element) {
+    element.style.opacity = "0";
+    let last = +/* @__PURE__ */ new Date();
+    let opacity = "0";
+    let tick = function() {
+      opacity = `${+element.style.opacity + ((/* @__PURE__ */ new Date()).getTime() - last) / duration}`;
+      element.style.opacity = opacity;
+      last = +/* @__PURE__ */ new Date();
+      if (+opacity < 1) {
+        !!window.requestAnimationFrame && requestAnimationFrame(tick) || setTimeout(tick, 16);
+      }
+    };
+    tick();
+  }
+}
 function findSingle(element, selector) {
   return isElement(element) ? element.matches(selector) ? element : element.querySelector(selector) : null;
+}
+function focus(element, options) {
+  element && document.activeElement !== element && element.focus(options);
 }
 function getHeight(element) {
   if (element) {
@@ -156,6 +309,9 @@ function getWidth(element) {
   }
   return 0;
 }
+function isTouchDevice() {
+  return "ontouchstart" in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
+}
 function remove(element) {
   var _a;
   if (element) {
@@ -163,13 +319,18 @@ function remove(element) {
     else element.remove();
   }
 }
+function removeChild(element, child) {
+  const target = toElement(element);
+  if (target) target.removeChild(child);
+  else throw new Error("Cannot remove " + child + " from " + element);
+}
 function setAttribute(element, attribute = "", value) {
   if (isElement(element) && value !== null && value !== void 0) {
     element.setAttribute(attribute, value);
   }
 }
 
-// node_modules/@primeuix/utils/eventbus/index.mjs
+// ../../node_modules/@primeuix/utils/eventbus/index.mjs
 function EventBus() {
   const allHandlers = /* @__PURE__ */ new Map();
   return {
@@ -201,7 +362,7 @@ function EventBus() {
   };
 }
 
-// node_modules/@primeuix/utils/object/index.mjs
+// ../../node_modules/@primeuix/utils/object/index.mjs
 function isEmpty(value) {
   return value === null || value === void 0 || value === "" || Array.isArray(value) && value.length === 0 || !(value instanceof Date) && typeof value === "object" && Object.keys(value).length === 0;
 }
@@ -275,6 +436,17 @@ function equals(obj1, obj2, field) {
   if (field) return resolveFieldData(obj1, field) === resolveFieldData(obj2, field);
   else return deepEquals(obj1, obj2);
 }
+function findLastIndex(arr, callback) {
+  let index = -1;
+  if (isNotEmpty(arr)) {
+    try {
+      index = arr.findLastIndex(callback);
+    } catch (e) {
+      index = arr.lastIndexOf([...arr].reverse().find(callback));
+    }
+  }
+  return index;
+}
 function isObject(value, empty = true) {
   return value instanceof Object && value.constructor === Object && (empty || Object.keys(value).length !== 0);
 }
@@ -297,6 +469,9 @@ function isArray(value, empty = true) {
 }
 function isNumber(value) {
   return isNotEmpty(value) && !isNaN(value);
+}
+function isPrintableCharacter(char = "") {
+  return isNotEmpty(char) && char.length === 1 && !!char.match(/\S| /);
 }
 function matchRegex(str, regex) {
   if (regex) {
@@ -371,7 +546,7 @@ function toTokenKey(str) {
   return isString(str) ? str.replace(/[A-Z]/g, (c, i) => i === 0 ? c : "." + c.toLowerCase()).toLowerCase() : str;
 }
 
-// node_modules/@primeuix/utils/uuid/index.mjs
+// ../../node_modules/@primeuix/utils/uuid/index.mjs
 var lastIds = {};
 function uuid(prefix = "pui_id_") {
   if (!lastIds.hasOwnProperty(prefix)) {
@@ -381,7 +556,7 @@ function uuid(prefix = "pui_id_") {
   return `${prefix}${lastIds[prefix]}`;
 }
 
-// node_modules/@primeuix/utils/zindex/index.mjs
+// ../../node_modules/@primeuix/utils/zindex/index.mjs
 function handler() {
   let zIndexes = [];
   const generateZIndex = (key, autoZIndex, baseZIndex = 999) => {
@@ -426,7 +601,7 @@ function handler() {
 }
 var ZIndex = handler();
 
-// node_modules/primeng/fesm2022/primeng-api.mjs
+// ../../node_modules/primeng/fesm2022/primeng-api.mjs
 var ConfirmEventType;
 (function(ConfirmEventType2) {
   ConfirmEventType2[ConfirmEventType2["ACCEPT"] = 0] = "ACCEPT";
@@ -951,6 +1126,56 @@ var SharedModule = class _SharedModule {
     exports: [Header, Footer, PrimeTemplate]
   });
 })();
+var TranslationKeys = class {
+  static STARTS_WITH = "startsWith";
+  static CONTAINS = "contains";
+  static NOT_CONTAINS = "notContains";
+  static ENDS_WITH = "endsWith";
+  static EQUALS = "equals";
+  static NOT_EQUALS = "notEquals";
+  static NO_FILTER = "noFilter";
+  static LT = "lt";
+  static LTE = "lte";
+  static GT = "gt";
+  static GTE = "gte";
+  static IS = "is";
+  static IS_NOT = "isNot";
+  static BEFORE = "before";
+  static AFTER = "after";
+  static CLEAR = "clear";
+  static APPLY = "apply";
+  static MATCH_ALL = "matchAll";
+  static MATCH_ANY = "matchAny";
+  static ADD_RULE = "addRule";
+  static REMOVE_RULE = "removeRule";
+  static ACCEPT = "accept";
+  static REJECT = "reject";
+  static CHOOSE = "choose";
+  static UPLOAD = "upload";
+  static CANCEL = "cancel";
+  static PENDING = "pending";
+  static FILE_SIZE_TYPES = "fileSizeTypes";
+  static DAY_NAMES = "dayNames";
+  static DAY_NAMES_SHORT = "dayNamesShort";
+  static DAY_NAMES_MIN = "dayNamesMin";
+  static MONTH_NAMES = "monthNames";
+  static MONTH_NAMES_SHORT = "monthNamesShort";
+  static FIRST_DAY_OF_WEEK = "firstDayOfWeek";
+  static TODAY = "today";
+  static WEEK_HEADER = "weekHeader";
+  static WEAK = "weak";
+  static MEDIUM = "medium";
+  static STRONG = "strong";
+  static PASSWORD_PROMPT = "passwordPrompt";
+  static EMPTY_MESSAGE = "emptyMessage";
+  static EMPTY_FILTER_MESSAGE = "emptyFilterMessage";
+  static SHOW_FILTER_MENU = "showFilterMenu";
+  static HIDE_FILTER_MENU = "hideFilterMenu";
+  static SELECTION_MESSAGE = "selectionMessage";
+  static ARIA = "aria";
+  static SELECT_COLOR = "selectColor";
+  static BROWSE_FILES = "browseFiles";
+};
 var TreeDragDropService = class _TreeDragDropService {
   dragStartSource = new Subject();
   dragStopSource = new Subject();
@@ -976,7 +1201,7 @@ var TreeDragDropService = class _TreeDragDropService {
   }], null, null);
 })();
 
-// node_modules/@primeuix/styled/index.mjs
+// ../../node_modules/@primeuix/styled/index.mjs
 var __defProp = Object.defineProperty;
 var __defProps = Object.defineProperties;
 var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
@@ -1759,7 +1984,7 @@ var config_default = {
   }
 };
 
-// node_modules/primeng/fesm2022/primeng-usestyle.mjs
+// ../../node_modules/primeng/fesm2022/primeng-usestyle.mjs
 var _id = 0;
 var UseStyle = class _UseStyle {
   document = inject(DOCUMENT);
@@ -1818,7 +2043,7 @@ var UseStyle = class _UseStyle {
   }], null, null);
 })();
 
-// node_modules/primeng/fesm2022/primeng-base.mjs
+// ../../node_modules/primeng/fesm2022/primeng-base.mjs
 var base = {
   _loadedStyleNames: /* @__PURE__ */ new Set(),
   getLoadedStyleNames() {
@@ -2106,7 +2331,7 @@ var BaseStyle = class _BaseStyle {
   }], null, null);
 })();
 
-// node_modules/primeng/fesm2022/primeng-config.mjs
+// ../../node_modules/primeng/fesm2022/primeng-config.mjs
 var ThemeProvider = class _ThemeProvider {
   // @todo define type for theme
   theme = signal(void 0);
@@ -2412,19 +2637,34 @@ export {
   hasClass,
   addClass,
   removeClass,
+  getViewport,
+  getWindowScrollLeft,
+  getWindowScrollTop,
+  absolutePosition,
   getOuterWidth,
+  relativePosition,
+  appendChild,
+  fadeIn,
   findSingle,
+  focus,
   getHeight,
   getOffset,
   getOuterHeight,
   getWidth,
+  isTouchDevice,
   remove,
+  removeChild,
   isEmpty,
   isNotEmpty,
+  findLastIndex,
+  resolve,
   getKeyValue,
+  isPrintableCharacter,
   uuid,
+  OverlayService,
   PrimeTemplate,
   SharedModule,
+  TranslationKeys,
   service_default,
   $dt,
   config_default,
@@ -2435,4 +2675,4 @@ export {
   PRIME_NG_CONFIG,
   providePrimeNG
 };
-//# sourceMappingURL=chunk-DHWM6FLV.js.map
+//# sourceMappingURL=chunk-S2YCO6QD.js.map

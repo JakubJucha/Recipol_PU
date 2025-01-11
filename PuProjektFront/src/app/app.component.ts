@@ -10,4 +10,9 @@ import {ToastrService} from 'ngx-toastr';
 export class AppComponent {
 
 
+  get isLoggedIn() : boolean {
+    const token = localStorage.getItem('token');
+    return token != null && token.length > 0;
+  }
+
 }

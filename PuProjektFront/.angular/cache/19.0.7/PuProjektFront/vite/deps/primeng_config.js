@@ -3,9 +3,9 @@ import {
   PrimeNG,
   ThemeProvider,
   providePrimeNG
-} from "./chunk-DHWM6FLV.js";
-import "./chunk-6E2G5MVT.js";
-import "./chunk-EP4V22QT.js";
+} from "./chunk-S2YCO6QD.js";
+import "./chunk-Z4SLCXDG.js";
+import "./chunk-IBUPOGGH.js";
 import "./chunk-WDMUDEB6.js";
 export {
   PRIME_NG_CONFIG,
