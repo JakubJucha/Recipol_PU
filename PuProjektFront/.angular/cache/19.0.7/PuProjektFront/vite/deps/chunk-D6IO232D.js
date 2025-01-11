@@ -1,6 +1,6 @@
 import {
   BaseComponent
-} from "./chunk-UI62FMK4.js";
+} from "./chunk-TTN5ZBXB.js";
 import {
   BaseStyle,
   SharedModule,
@@ -10,10 +10,10 @@ import {
   isNotEmpty,
   removeClass,
   uuid
-} from "./chunk-S2YCO6QD.js";
+} from "./chunk-QRYIBWM3.js";
 import {
   CommonModule
-} from "./chunk-Z4SLCXDG.js";
+} from "./chunk-NFHW4X2S.js";
 import {
   ChangeDetectionStrategy,
   Component,
@@ -43,9 +43,9 @@ import {
   ɵɵstyleProp,
   ɵɵtext,
   ɵɵtextInterpolate
-} from "./chunk-IBUPOGGH.js";
+} from "./chunk-WIHE3A5V.js";
 
-// ../../node_modules/primeng/fesm2022/primeng-badge.mjs
+// node_modules/primeng/fesm2022/primeng-badge.mjs
 var theme = ({
   dt
 }) => `
@@ -599,4 +599,4 @@ export {
   Badge,
   BadgeModule
 };
-//# sourceMappingURL=chunk-S2SVQTYM.js.map
+//# sourceMappingURL=chunk-D6IO232D.js.map

@@ -13,14 +13,26 @@ namespace RecipolApi
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAngularApp", policy =>
+                {
+                    policy.WithOrigins("http://localhost:4200") 
+                          .AllowAnyMethod() 
+                          .AllowAnyHeader(); 
+                });
+            });
+
             var jwtKey = "SuperTajnyKluczJWT000111000111000111";
             builder.Services.AddSingleton<IJwtService>(new JwtService(jwtKey));
+
 
             // Add services to the container.
 
             builder.Services.AddControllers();
             builder.Services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 
             builder.Services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -62,6 +74,7 @@ namespace RecipolApi
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+            app.UseCors("AllowAngularApp");
             app.UseAuthentication();
             app.UseAuthorization();
 

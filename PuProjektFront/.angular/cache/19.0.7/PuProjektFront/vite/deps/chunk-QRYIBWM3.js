@@ -1,7 +1,7 @@
 import {
   CommonModule,
   DOCUMENT
-} from "./chunk-Z4SLCXDG.js";
+} from "./chunk-NFHW4X2S.js";
 import {
   Component,
   Directive,
@@ -30,12 +30,12 @@ import {
   ɵɵprojection,
   ɵɵprojectionDef,
   ɵɵsetNgModuleScope
-} from "./chunk-IBUPOGGH.js";
+} from "./chunk-WIHE3A5V.js";
 import {
   __spreadValues
 } from "./chunk-WDMUDEB6.js";
 
-// ../../node_modules/@primeuix/utils/dom/index.mjs
+// node_modules/@primeuix/utils/dom/index.mjs
 function hasClass(element, className) {
   if (element) {
     if (element.classList) return element.classList.contains(className);
@@ -330,7 +330,7 @@ function setAttribute(element, attribute = "", value) {
   }
 }
 
-// ../../node_modules/@primeuix/utils/eventbus/index.mjs
+// node_modules/@primeuix/utils/eventbus/index.mjs
 function EventBus() {
   const allHandlers = /* @__PURE__ */ new Map();
   return {
@@ -362,7 +362,7 @@ function EventBus() {
   };
 }
 
-// ../../node_modules/@primeuix/utils/object/index.mjs
+// node_modules/@primeuix/utils/object/index.mjs
 function isEmpty(value) {
   return value === null || value === void 0 || value === "" || Array.isArray(value) && value.length === 0 || !(value instanceof Date) && typeof value === "object" && Object.keys(value).length === 0;
 }
@@ -546,7 +546,7 @@ function toTokenKey(str) {
   return isString(str) ? str.replace(/[A-Z]/g, (c, i) => i === 0 ? c : "." + c.toLowerCase()).toLowerCase() : str;
 }
 
-// ../../node_modules/@primeuix/utils/uuid/index.mjs
+// node_modules/@primeuix/utils/uuid/index.mjs
 var lastIds = {};
 function uuid(prefix = "pui_id_") {
   if (!lastIds.hasOwnProperty(prefix)) {
@@ -556,7 +556,7 @@ function uuid(prefix = "pui_id_") {
   return `${prefix}${lastIds[prefix]}`;
 }
 
-// ../../node_modules/@primeuix/utils/zindex/index.mjs
+// node_modules/@primeuix/utils/zindex/index.mjs
 function handler() {
   let zIndexes = [];
   const generateZIndex = (key, autoZIndex, baseZIndex = 999) => {
@@ -601,7 +601,7 @@ function handler() {
 }
 var ZIndex = handler();
 
-// ../../node_modules/primeng/fesm2022/primeng-api.mjs
+// node_modules/primeng/fesm2022/primeng-api.mjs
 var ConfirmEventType;
 (function(ConfirmEventType2) {
   ConfirmEventType2[ConfirmEventType2["ACCEPT"] = 0] = "ACCEPT";
@@ -1201,7 +1201,7 @@ var TreeDragDropService = class _TreeDragDropService {
   }], null, null);
 })();
 
-// ../../node_modules/@primeuix/styled/index.mjs
+// node_modules/@primeuix/styled/index.mjs
 var __defProp = Object.defineProperty;
 var __defProps = Object.defineProperties;
 var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
@@ -1984,7 +1984,7 @@ var config_default = {
   }
 };
 
-// ../../node_modules/primeng/fesm2022/primeng-usestyle.mjs
+// node_modules/primeng/fesm2022/primeng-usestyle.mjs
 var _id = 0;
 var UseStyle = class _UseStyle {
   document = inject(DOCUMENT);
@@ -2043,7 +2043,7 @@ var UseStyle = class _UseStyle {
   }], null, null);
 })();
 
-// ../../node_modules/primeng/fesm2022/primeng-base.mjs
+// node_modules/primeng/fesm2022/primeng-base.mjs
 var base = {
   _loadedStyleNames: /* @__PURE__ */ new Set(),
   getLoadedStyleNames() {
@@ -2331,7 +2331,7 @@ var BaseStyle = class _BaseStyle {
   }], null, null);
 })();
 
-// ../../node_modules/primeng/fesm2022/primeng-config.mjs
+// node_modules/primeng/fesm2022/primeng-config.mjs
 var ThemeProvider = class _ThemeProvider {
   // @todo define type for theme
   theme = signal(void 0);
@@ -2675,4 +2675,4 @@ export {
   PRIME_NG_CONFIG,
   providePrimeNG
 };
-//# sourceMappingURL=chunk-S2YCO6QD.js.map
+//# sourceMappingURL=chunk-QRYIBWM3.js.map

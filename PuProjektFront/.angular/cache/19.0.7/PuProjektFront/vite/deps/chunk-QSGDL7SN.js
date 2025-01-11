@@ -1,13 +1,13 @@
 import {
   DomHandler
-} from "./chunk-CUAUIBBF.js";
+} from "./chunk-VOBD7F6Z.js";
 import {
   BaseComponent
-} from "./chunk-UI62FMK4.js";
+} from "./chunk-TTN5ZBXB.js";
 import {
   DOCUMENT,
   isPlatformBrowser
-} from "./chunk-Z4SLCXDG.js";
+} from "./chunk-NFHW4X2S.js";
 import {
   Directive,
   ElementRef,
@@ -24,9 +24,9 @@ import {
   ɵɵdefineNgModule,
   ɵɵgetInheritedFactory,
   ɵɵsetNgModuleScope
-} from "./chunk-IBUPOGGH.js";
+} from "./chunk-WIHE3A5V.js";
 
-// ../../node_modules/primeng/fesm2022/primeng-autofocus.mjs
+// node_modules/primeng/fesm2022/primeng-autofocus.mjs
 var AutoFocus = class _AutoFocus extends BaseComponent {
   /**
    * When present, it specifies that the component should automatically get focus on load.
@@ -136,4 +136,4 @@ var AutoFocusModule = class _AutoFocusModule {
 export {
   AutoFocus
 };
-//# sourceMappingURL=chunk-WH7CINZM.js.map
+//# sourceMappingURL=chunk-QSGDL7SN.js.map

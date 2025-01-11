@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {ToastrService} from 'ngx-toastr';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-register-form',
@@ -14,6 +15,7 @@ export class RegisterFormComponent {
 
   constructor(private fb: FormBuilder,
               private http: HttpClient,
+              private _router: Router,
               private _toastrService: ToastrService) {
     this.form = this.fb.group({
       name: ['', Validators.required],
@@ -26,6 +28,8 @@ export class RegisterFormComponent {
     });
   }
 
+
+
   passwordMatchValidator(form: FormGroup) {
     const password = form.get('password')?.value;
     const repeatPassword = form.get('repeatPassword')?.value;
@@ -37,12 +41,13 @@ export class RegisterFormComponent {
 
   register() {
     const formData = this.form.value;
+    delete formData.repeatPassword;
     console.log(formData);
-    this.http.post('http://localhost:5168/api/authorize/register', formData).subscribe(
+    this.http.post('http://localhost:5266/api/Auth/register', formData).subscribe(
       response => {
         console.log('Rejestracja zakończona pomyślnie!', response);
         this._toastrService.success("Pomyślnie utworzono konto");
-
+        this._router.navigate(['/login']);
       },
       error => {
         console.error('Błąd podczas rejestracji:', error);
