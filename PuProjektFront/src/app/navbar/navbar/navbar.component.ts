@@ -15,21 +15,14 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
     this.items = [
       {
-        label: 'Tu może coś być',
-        icon: 'pi pi-home',
-        routerLink: '/home',
+        label: 'Przepisy',
+        icon: 'pi pi-list',
+        routerLink: '/recipes',
       },
       {
-        label: 'Tu też',
-        icon: 'pi pi-star',
+        label: 'Składniki',
+        icon: 'pi pi-shopping-bag',
         routerLink: '/favorites',
-        queryParams: { category: 'stars' },
-      },
-      {
-        label: 'Nawet tu',
-        icon: 'pi pi-search',
-        routerLink: '/search',
-        fragment: 'top',
       },
     ];
   }

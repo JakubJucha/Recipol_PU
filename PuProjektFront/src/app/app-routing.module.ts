@@ -7,7 +7,8 @@ import {RegisterFormComponent} from './register-form/register-form.component';
 const routes: Routes = [
   {path: 'profile', component: ProfileComponent},
   {path: 'login', component: LoginFormComponent},
-  {path: 'register', component: RegisterFormComponent},
+  { path: 'register', component: RegisterFormComponent, data: { mode: 'REGISTER' } },
+  { path: 'editUserData', component: RegisterFormComponent, data: { mode: 'EDIT' } },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
 ];
 

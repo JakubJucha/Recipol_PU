@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {ToastrService} from 'ngx-toastr';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-register-form',
@@ -10,12 +10,15 @@ import {Router} from '@angular/router';
   templateUrl: './register-form.component.html',
   styleUrl: './register-form.component.css'
 })
-export class RegisterFormComponent {
+export class RegisterFormComponent implements OnInit {
   form: FormGroup;
+  mode: string  = 'REGISTER';
+  header: string = '';
 
   constructor(private fb: FormBuilder,
               private http: HttpClient,
               private _router: Router,
+              private route: ActivatedRoute,
               private _toastrService: ToastrService) {
     this.form = this.fb.group({
       name: ['', Validators.required],
@@ -28,7 +31,18 @@ export class RegisterFormComponent {
     });
   }
 
+ngOnInit() {
+  this.mode = this.route.snapshot.data['mode'];
+  this._readData();
+}
 
+isRegisterMode() {
+    return this.mode === 'REGISTER';
+}
+
+  editData() {
+  //   TODO tu bedzie edycja danych
+  }
 
   passwordMatchValidator(form: FormGroup) {
     const password = form.get('password')?.value;
@@ -54,5 +68,13 @@ export class RegisterFormComponent {
         this._toastrService.error(error.error, "Błąd podczas rejestracji.")
       }
     );
+  }
+
+  private _readData() {
+    if (this.mode === 'REGISTER') {
+      this.header = 'Zarejestruj się'
+    } else {
+      this.header = 'Edytuj dane'
+    }
   }
 }

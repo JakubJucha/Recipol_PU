@@ -1,8 +1,8 @@
 <div class="register-wrapper">
   <form [formGroup]="form" (submit)="register()">
     <div class="form-container">
-      <h1>Zarejestruj się</h1>
-      <span>Masz już konto? <a [routerLink]="'/login'">Zaloguj się</a></span>
+      <h1>{{header}}</h1>
+      <span *ngIf="isRegisterMode()">Masz już konto? <a [routerLink]="'/login'">Zaloguj się</a></span>
       <div class="form-fields">
         <div class="row">
           <div class="col-lg-6">
@@ -52,7 +52,8 @@
           </div>
         </p-floatlabel>
       </div>
-      <button type="submit" [disabled]="!form.valid" pButton pRipple >Załóż konto <i class="pi pi-check"></i></button>
+      <button *ngIf="isRegisterMode()" type="submit" [disabled]="!form.valid" pButton pRipple >Załóż konto <i class="pi pi-check"></i></button>
+      <button *ngIf="!isRegisterMode()" [disabled]="!form.valid" pButton pRipple (click)="editData()" >Edytuj dane <i class="pi pi-check"></i></button>
     </div>
   </form>
 </div>

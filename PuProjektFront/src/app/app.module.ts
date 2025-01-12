@@ -24,6 +24,7 @@ import { RegisterFormComponent } from './register-form/register-form.component';
 import {FloatLabel} from 'primeng/floatlabel';
 import {Password} from 'primeng/password';
 import {HttpClient, HttpClientModule, HttpHandler} from '@angular/common/http';
+import {MatAnchor} from "@angular/material/button";
 
 @NgModule({
   declarations: [
@@ -33,29 +34,30 @@ import {HttpClient, HttpClientModule, HttpHandler} from '@angular/common/http';
     LoginFormComponent,
     RegisterFormComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    ButtonModule,
-    MatSlideToggle,
-    Knob,
-    FormsModule,
-    Button,
-    ButtonDirective,
-    Ripple,
-    ToastrModule.forRoot({
-      positionClass: 'toast-bottom-right',
-    }),
-    Menubar,
-    Badge,
-    Avatar,
-    NgOptimizedImage,
-    InputText,
-    ReactiveFormsModule,
-    FloatLabel,
-    Password,
-    HttpClientModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        ButtonModule,
+        MatSlideToggle,
+        Knob,
+        FormsModule,
+        Button,
+        ButtonDirective,
+        Ripple,
+        ToastrModule.forRoot({
+            positionClass: 'toast-bottom-right',
+        }),
+        Menubar,
+        Badge,
+        Avatar,
+        NgOptimizedImage,
+        InputText,
+        ReactiveFormsModule,
+        FloatLabel,
+        Password,
+        HttpClientModule,
+        MatAnchor,
+    ],
   providers: [
     provideAnimationsAsync(),
     KnobModule,

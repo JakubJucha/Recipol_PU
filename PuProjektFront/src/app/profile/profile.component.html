@@ -1,1 +1,25 @@
-<p>tu bedzie profil!</p>
+<div class="profile-wrapper">
+  <div class="data-wrapper">
+    <div class="header-wrapper">
+      <h1>Dane użytkownika</h1>
+      <i class="pi pi-pencil edit-icon" title="Edytuj dane" (click)="editUserData()"></i>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        Imię i nazwisko
+      </div>
+      <div class="col-lg-6">
+        <div [innerHTML]="'Magda Piec'"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        Adres email
+      </div>
+      <div class="col-lg-6">
+        <div [innerHTML]="'magda@onet.pl'"></div>
+      </div>
+    </div>
+    <button pButton type="button" class="p-button-danger p-button-outlined logout-button" (click)="logOut()">Wyloguj się <i class="pi pi-sign-out" style="font-size: 0.8rem"></i></button>
+  </div>
+</div>
