@@ -1,4 +1,11 @@
 import {
+  Badge,
+  BadgeModule
+} from "./chunk-D6IO232D.js";
+import {
+  Ripple
+} from "./chunk-JALY3IZL.js";
+import {
   zindexutils
 } from "./chunk-6EUKM3X6.js";
 import {
@@ -8,22 +15,13 @@ import {
   ConnectedOverlayScrollHandler
 } from "./chunk-VOBD7F6Z.js";
 import {
-  Badge,
-  BadgeModule
-} from "./chunk-D6IO232D.js";
-import {
-  Ripple
-} from "./chunk-JALY3IZL.js";
-import {
-  BaseComponent
-} from "./chunk-TTN5ZBXB.js";
-import {
   RouterLink,
   RouterLinkActive,
   RouterModule
 } from "./chunk-ZIIWXTUH.js";
-import "./chunk-CQRWO3VH.js";
-import "./chunk-U2WSDBZB.js";
+import {
+  BaseComponent
+} from "./chunk-TTN5ZBXB.js";
 import {
   BaseStyle,
   PrimeTemplate,
@@ -47,6 +45,8 @@ import {
   resolve,
   uuid
 } from "./chunk-QRYIBWM3.js";
+import "./chunk-CQRWO3VH.js";
+import "./chunk-U2WSDBZB.js";
 import {
   CommonModule,
   DOCUMENT,

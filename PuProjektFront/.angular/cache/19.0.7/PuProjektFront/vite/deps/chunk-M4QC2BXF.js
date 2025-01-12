@@ -1,9 +1,9 @@
 import {
-  BaseComponent
-} from "./chunk-TTN5ZBXB.js";
-import {
   NgModel
 } from "./chunk-EP2DYSPX.js";
+import {
+  BaseComponent
+} from "./chunk-TTN5ZBXB.js";
 import {
   BaseStyle,
   isEmpty
@@ -288,4 +288,4 @@ export {
   InputText,
   InputTextModule
 };
-//# sourceMappingURL=chunk-PZAWGWEN.js.map
+//# sourceMappingURL=chunk-M4QC2BXF.js.map

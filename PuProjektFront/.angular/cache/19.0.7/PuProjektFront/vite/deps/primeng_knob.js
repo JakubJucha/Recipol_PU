@@ -1,9 +1,9 @@
 import {
-  BaseComponent
-} from "./chunk-TTN5ZBXB.js";
-import {
   NG_VALUE_ACCESSOR
 } from "./chunk-EP2DYSPX.js";
+import {
+  BaseComponent
+} from "./chunk-TTN5ZBXB.js";
 import {
   $dt,
   BaseStyle,
