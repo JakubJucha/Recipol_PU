@@ -7,7 +7,6 @@ import {ToastrService} from 'ngx-toastr';
 @Component({
   selector: 'app-login-form',
   standalone: false,
-
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.css'
 })
@@ -26,7 +25,6 @@ export class LoginFormComponent {
 
   login() {
     const credentials = this.form.value;
-    console.log(this.form.value);
     this.userService.login(credentials).subscribe(
       response => {
         if (response && response.token) {

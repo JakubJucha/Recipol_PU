@@ -3,7 +3,7 @@
     <div class="form-container">
       <h1>{{header}}</h1>
       <span *ngIf="isRegisterMode()">Masz już konto? <a [routerLink]="'/login'">Zaloguj się</a></span>
-      <div class="form-fields">
+      <div>
         <div class="row">
           <div class="col-lg-6">
             <p-floatlabel variant="on">
@@ -26,7 +26,7 @@
             </p-floatlabel>
           </div>
         </div>
-        <p-floatlabel variant="on">
+        <p-floatlabel *ngIf="isRegisterMode()" variant="on">
           <p-password
             [inputStyle]="{'width':'100%'}"
             [style]="{'width':'100%'}"
@@ -37,7 +37,7 @@
             [toggleMask]="true" />
           <label for="password">Hasło</label>
         </p-floatlabel>
-        <p-floatlabel variant="on">
+        <p-floatlabel *ngIf="isRegisterMode()" variant="on">
           <p-password
             [inputStyle]="{'width':'100%'}"
             [style]="{'width':'100%'}"
@@ -53,7 +53,14 @@
         </p-floatlabel>
       </div>
       <button *ngIf="isRegisterMode()" type="submit" [disabled]="!form.valid" pButton pRipple >Załóż konto <i class="pi pi-check"></i></button>
-      <button *ngIf="!isRegisterMode()" [disabled]="!form.valid" pButton pRipple (click)="editData()" >Edytuj dane <i class="pi pi-check"></i></button>
+      <div *ngIf="!isRegisterMode()" class="row mt-0">
+        <div class="col-lg-6">
+          <button style="width: 100%" type="button" class="p-button-secondary p-button-outlined" pButton pRipple (click)="cancel()" >Anuluj </button>
+        </div>
+        <div class="col-lg-6">
+          <button style="width: 100%" type="button" [disabled]="!form.valid" pButton pRipple (click)="editData()" >Edytuj dane <i class="pi pi-check"></i></button>
+        </div>
+      </div>
     </div>
   </form>
 </div>

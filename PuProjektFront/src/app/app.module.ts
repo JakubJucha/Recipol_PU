@@ -25,6 +25,7 @@ import {FloatLabel} from 'primeng/floatlabel';
 import {Password} from 'primeng/password';
 import {HttpClient, HttpClientModule, HttpHandler} from '@angular/common/http';
 import {MatAnchor} from "@angular/material/button";
+import { PasswordFormComponent } from './password-form/password-form.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import {MatAnchor} from "@angular/material/button";
     ProfileComponent,
     LoginFormComponent,
     RegisterFormComponent,
+    PasswordFormComponent,
   ],
     imports: [
         BrowserModule,

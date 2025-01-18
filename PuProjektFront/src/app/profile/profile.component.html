@@ -5,21 +5,28 @@
       <i class="pi pi-pencil edit-icon" title="Edytuj dane" (click)="editUserData()"></i>
     </div>
     <div class="row">
-      <div class="col-lg-6">
+      <div class="col-lg-5">
         Imię i nazwisko
       </div>
-      <div class="col-lg-6">
-        <div [innerHTML]="'Magda Piec'"></div>
+      <div class="col-lg-7">
+        <div [innerHTML]="profileData.name + ' ' + profileData.surname"></div>
       </div>
     </div>
     <div class="row">
-      <div class="col-lg-6">
+      <div class="col-lg-5">
         Adres email
       </div>
-      <div class="col-lg-6">
-        <div [innerHTML]="'magda@onet.pl'"></div>
+      <div class="col-lg-7">
+        <div [innerHTML]="profileData.email"></div>
       </div>
     </div>
-    <button pButton type="button" class="p-button-danger p-button-outlined logout-button" (click)="logOut()">Wyloguj się <i class="pi pi-sign-out" style="font-size: 0.8rem"></i></button>
+    <div class="button-container">
+      <button pButton type="button" class="p-button-secondary p-button-outlined" (click)="initChangePassword()">
+        Zmień hasło
+      </button>
+      <button pButton type="button" class="p-button-danger p-button-outlined logout-button" (click)="logOut()">
+        Wyloguj się <i class="pi pi-sign-out" style="font-size: 0.8rem"></i>
+      </button>
+    </div>
   </div>
 </div>
