@@ -66,8 +66,6 @@ namespace RecipolApi
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 
-            builder.Services.AddDbContext<AppDbContext>(options =>
-            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             // Dodaj PasswordHasher jako serwis
             builder.Services.AddScoped<PasswordHasher>();
@@ -96,7 +94,7 @@ namespace RecipolApi
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+
 
             var app = builder.Build();
 
