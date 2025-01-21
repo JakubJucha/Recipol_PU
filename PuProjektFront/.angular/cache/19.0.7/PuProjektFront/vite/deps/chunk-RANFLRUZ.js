@@ -81,6 +81,11 @@ function removeClass(element, className) {
     [className].flat().filter(Boolean).forEach((_classNames) => _classNames.split(" ").forEach(fn));
   }
 }
+function unblockBodyScroll(className = "p-overflow-hidden") {
+  const variableData = getCSSVariableByRegex(/-scrollbar-width$/);
+  (variableData == null ? void 0 : variableData.name) && document.body.style.removeProperty(variableData.name);
+  removeClass(document.body, className);
+}
 function getHiddenElementDimensions(element) {
   let dimensions = {
     width: 0,
@@ -261,11 +266,32 @@ function fadeIn(element, duration) {
     tick();
   }
 }
+function find(element, selector) {
+  return isElement(element) ? Array.from(element.querySelectorAll(selector)) : [];
+}
 function findSingle(element, selector) {
   return isElement(element) ? element.matches(selector) ? element : element.querySelector(selector) : null;
 }
 function focus(element, options) {
   element && document.activeElement !== element && element.focus(options);
+}
+function getFocusableElements(element, selector = "") {
+  let focusableElements = find(element, `button:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden])${selector},
+            [href][clientHeight][clientWidth]:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden])${selector},
+            input:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden])${selector},
+            select:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden])${selector},
+            textarea:not([tabindex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden])${selector},
+            [tabIndex]:not([tabIndex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden])${selector},
+            [contenteditable]:not([tabIndex = "-1"]):not([disabled]):not([style*="display:none"]):not([hidden])${selector}`);
+  let visibleFocusableElements = [];
+  for (let focusableElement of focusableElements) {
+    if (getComputedStyle(focusableElement).display != "none" && getComputedStyle(focusableElement).visibility != "hidden") visibleFocusableElements.push(focusableElement);
+  }
+  return visibleFocusableElements;
+}
+function getFirstFocusableElement(element, selector) {
+  const focusableElements = getFocusableElements(element, selector);
+  return focusableElements.length > 0 ? focusableElements[0] : null;
 }
 function getHeight(element) {
   if (element) {
@@ -275,6 +301,20 @@ function getHeight(element) {
     return height;
   }
   return 0;
+}
+function getParentNode(element) {
+  if (element) {
+    let parent = element.parentNode;
+    if (parent && parent instanceof ShadowRoot && parent.host) {
+      parent = parent.host;
+    }
+    return parent;
+  }
+  return null;
+}
+function getLastFocusableElement(element, selector) {
+  const focusableElements = getFocusableElements(element, selector);
+  return focusableElements.length > 0 ? focusableElements[focusableElements.length - 1] : null;
 }
 function getOffset(element) {
   if (element) {
@@ -300,6 +340,41 @@ function getOuterHeight(element, margin) {
   }
   return 0;
 }
+function getSelection() {
+  if (window.getSelection) return window.getSelection().toString();
+  else if (document.getSelection) return document.getSelection().toString();
+  return void 0;
+}
+function isExist(element) {
+  return !!(element !== null && typeof element !== "undefined" && element.nodeName && getParentNode(element));
+}
+function getTargetElement(target, currentElement) {
+  var _a;
+  if (!target) return void 0;
+  switch (target) {
+    case "document":
+      return document;
+    case "window":
+      return window;
+    case "body":
+      return document.body;
+    case "@next":
+      return currentElement == null ? void 0 : currentElement.nextElementSibling;
+    case "@prev":
+      return currentElement == null ? void 0 : currentElement.previousElementSibling;
+    case "@parent":
+      return currentElement == null ? void 0 : currentElement.parentElement;
+    case "@grandparent":
+      return (_a = currentElement == null ? void 0 : currentElement.parentElement) == null ? void 0 : _a.parentElement;
+    default:
+      if (typeof target === "string") {
+        return document.querySelector(target);
+      }
+      const isFunction2 = (obj) => !!(obj && obj.constructor && obj.call && obj.apply);
+      const element = toElement(isFunction2(target) ? target() : target);
+      return (element == null ? void 0 : element.nodeType) === 9 || isExist(element) ? element : void 0;
+  }
+}
 function getWidth(element) {
   if (element) {
     let width = element.offsetWidth;
@@ -308,6 +383,9 @@ function getWidth(element) {
     return width;
   }
   return 0;
+}
+function isVisible(element) {
+  return !!(element && element.offsetParent != null);
 }
 function isTouchDevice() {
   return "ontouchstart" in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
@@ -323,6 +401,23 @@ function removeChild(element, child) {
   const target = toElement(element);
   if (target) target.removeChild(child);
   else throw new Error("Cannot remove " + child + " from " + element);
+}
+function scrollInView(container, item) {
+  let borderTopValue = getComputedStyle(container).getPropertyValue("borderTopWidth");
+  let borderTop = borderTopValue ? parseFloat(borderTopValue) : 0;
+  let paddingTopValue = getComputedStyle(container).getPropertyValue("paddingTop");
+  let paddingTop = paddingTopValue ? parseFloat(paddingTopValue) : 0;
+  let containerRect = container.getBoundingClientRect();
+  let itemRect = item.getBoundingClientRect();
+  let offset = itemRect.top + document.body.scrollTop - (containerRect.top + document.body.scrollTop) - borderTop - paddingTop;
+  let scroll = container.scrollTop;
+  let elementHeight = container.clientHeight;
+  let itemHeight = getOuterHeight(item);
+  if (offset < 0) {
+    container.scrollTop = scroll + offset;
+  } else if (offset + itemHeight > elementHeight) {
+    container.scrollTop = scroll + offset - elementHeight + itemHeight;
+  }
 }
 function setAttribute(element, attribute = "", value) {
   if (isElement(element) && value !== null && value !== void 0) {
@@ -435,6 +530,14 @@ function resolveFieldData(data, field) {
 function equals(obj1, obj2, field) {
   if (field) return resolveFieldData(obj1, field) === resolveFieldData(obj2, field);
   else return deepEquals(obj1, obj2);
+}
+function contains(value, list) {
+  if (value != null && list && list.length) {
+    for (let val of list) {
+      if (equals(value, val)) return true;
+    }
+  }
+  return false;
 }
 function findLastIndex(arr, callback) {
   let index = -1;
@@ -2637,6 +2740,7 @@ export {
   hasClass,
   addClass,
   removeClass,
+  unblockBodyScroll,
   getViewport,
   getWindowScrollLeft,
   getWindowScrollTop,
@@ -2647,21 +2751,35 @@ export {
   fadeIn,
   findSingle,
   focus,
+  getFocusableElements,
+  getFirstFocusableElement,
   getHeight,
+  getLastFocusableElement,
   getOffset,
   getOuterHeight,
+  getSelection,
+  getTargetElement,
   getWidth,
+  isVisible,
   isTouchDevice,
   remove,
   removeChild,
+  scrollInView,
   isEmpty,
+  deepEquals,
   isNotEmpty,
+  resolveFieldData,
+  equals,
+  contains,
   findLastIndex,
   resolve,
   getKeyValue,
   isPrintableCharacter,
   uuid,
+  FilterService,
   OverlayService,
+  Header,
+  Footer,
   PrimeTemplate,
   SharedModule,
   TranslationKeys,
@@ -2675,4 +2793,4 @@ export {
   PRIME_NG_CONFIG,
   providePrimeNG
 };
-//# sourceMappingURL=chunk-QRYIBWM3.js.map
+//# sourceMappingURL=chunk-RANFLRUZ.js.map

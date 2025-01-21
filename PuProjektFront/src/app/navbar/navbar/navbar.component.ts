@@ -22,7 +22,7 @@ export class NavbarComponent implements OnInit {
       {
         label: 'Składniki',
         icon: 'pi pi-shopping-bag',
-        routerLink: '/favorites',
+        routerLink: '/ingredients',
       },
     ];
   }

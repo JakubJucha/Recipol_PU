@@ -15,8 +15,6 @@ export class RegisterFormComponent implements OnInit {
   mode: string  = 'REGISTER';
   header: string = '';
 
-  profileData: any;
-
   constructor(private fb: FormBuilder,
               private http: HttpClient,
               private _router: Router,
@@ -99,7 +97,6 @@ isRegisterMode() {
     }
 
     this.http.get<any>(apiUrl, { headers }).subscribe(res => {
-      console.log('ee',res);
        this.form.controls['name'].setValue(res.name);
        this.form.controls['surname'].setValue(res.surname);
        this.form.controls['email'].setValue(res.email);

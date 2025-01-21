@@ -26,6 +26,11 @@ import {Password} from 'primeng/password';
 import {HttpClient, HttpClientModule, HttpHandler} from '@angular/common/http';
 import {MatAnchor} from "@angular/material/button";
 import { PasswordFormComponent } from './password-form/password-form.component';
+import { RecipesListComponent } from './recipes-list/recipes-list.component';
+import {Select} from 'primeng/select';
+import {Checkbox} from 'primeng/checkbox';
+import {DataView} from 'primeng/dataview';
+import {ScrollPanel} from 'primeng/scrollpanel';
 
 @NgModule({
   declarations: [
@@ -35,31 +40,36 @@ import { PasswordFormComponent } from './password-form/password-form.component';
     LoginFormComponent,
     RegisterFormComponent,
     PasswordFormComponent,
+    RecipesListComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        ButtonModule,
-        MatSlideToggle,
-        Knob,
-        FormsModule,
-        Button,
-        ButtonDirective,
-        Ripple,
-        ToastrModule.forRoot({
-            positionClass: 'toast-bottom-right',
-        }),
-        Menubar,
-        Badge,
-        Avatar,
-        NgOptimizedImage,
-        InputText,
-        ReactiveFormsModule,
-        FloatLabel,
-        Password,
-        HttpClientModule,
-        MatAnchor,
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ButtonModule,
+    MatSlideToggle,
+    Knob,
+    FormsModule,
+    Button,
+    ButtonDirective,
+    Ripple,
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right',
+    }),
+    Menubar,
+    Badge,
+    Avatar,
+    NgOptimizedImage,
+    InputText,
+    ReactiveFormsModule,
+    FloatLabel,
+    Password,
+    HttpClientModule,
+    MatAnchor,
+    Select,
+    Checkbox,
+    DataView,
+    ScrollPanel,
+  ],
   providers: [
     provideAnimationsAsync(),
     KnobModule,

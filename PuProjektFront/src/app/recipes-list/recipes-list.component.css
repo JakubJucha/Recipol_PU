@@ -1,0 +1,58 @@
+.search-filters-wrapper {
+  background-color: black;
+  width: 60rem;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 15px;
+}
+
+.form-container {
+  background-color: black;
+  width: 100%;
+  padding: 2rem;
+  border-radius: 12px;
+  gap: 1.5rem;
+}
+
+label {
+  color: floralwhite;
+}
+
+.custom-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.custom-col {
+  flex: 1;
+  max-width: 100%;
+}
+
+.recipes-list-wrapper{
+  background-color: black;
+  width: 60rem;
+  height: auto;
+}
+
+.single-recipe {
+  background-color: black;
+  color: floralwhite !important;
+}
+
+.single-recipe:hover {
+  border-left: solid 2px #34d399 !important;
+  border-bottom: solid 2px #34d399 !important;
+  cursor: pointer;
+}
+
+p {
+  color: #a1a1aa !important;
+}
+
+span {
+  color: #a1a1aa !important;
+}
+
+
+
