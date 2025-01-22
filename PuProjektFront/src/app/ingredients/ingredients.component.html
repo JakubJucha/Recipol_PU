@@ -1,0 +1,113 @@
+<div class="ingredients-wrapper">
+  <div class="row">
+    <div class="col-lg-5">
+      <div style="display: flex; justify-content: center;">
+        <h3>Wszystkie składniki</h3>
+      </div>
+      <div class="d-flex justify-content-center">
+        <p-listbox [options]="allIngredients"
+                   [(ngModel)]="ingredientToAdd"
+                   [filter]="true"
+                   [emptyMessage]="'Brak składników do wyboru'"
+                   scrollHeight="30rem"
+                   class="p-listbox"
+                   optionLabel="name">
+          <ng-template let-ingredient #item>
+            <div class="d-flex w-100">
+              <div class="fs-5">{{ ingredient.name }}</div>
+              <div class="ms-auto fs-6 category">{{ ingredient.category }}</div>
+            </div>
+          </ng-template>
+        </p-listbox>
+      </div>
+    </div>
+    <div class="col-lg-2 d-flex align-items-center">
+      <div class="w-100">
+        <p-input-group class="mb-4">
+          <p-floatlabel variant="on">
+            <input [disabled]="!ingredientToAdd" pInputText id="amount" [(ngModel)]="amountToAdd" />
+            <label for="amount">Ilość</label>
+          </p-floatlabel>
+          <p-inputgroup-addon>{{ingredientToAdd?.unit}}</p-inputgroup-addon>
+        </p-input-group>
+        <p-button
+          label="Dodaj"
+          type="button"
+          [disabled]="!checkButtonDisability()"
+          (onClick)="addIngredient()"
+          [style]="{'width':'230%'}"
+          icon="pi pi-arrow-right" iconPos="right" />
+      </div>
+    </div>
+    <div class="col-lg-5">
+      <div style="display: flex; justify-content: center;">
+        <h3>Posiadane składniki</h3>
+      </div>
+      <div class="d-flex justify-content-center">
+        <p-table [value]="usersIngredients"
+                 [scrollable]="true"
+                 [scrollHeight]="'35rem'"
+                 [tableStyle]="{ 'width': '33rem'}">
+          <ng-template #header>
+            <tr>
+              <th>Nazwa</th>
+              <th>Kategoria</th>
+              <th style="width: 150px">Posiadana ilość</th>
+              <th></th>
+            </tr>
+          </ng-template>
+          <ng-template #body let-ingredient>
+            <tr>
+              <td>{{ ingredient.name }}</td>
+              <td>{{ ingredient.category }}</td>
+              <td>
+                <div *ngIf="isEditing && editingIngredient === ingredient; else normalView">
+                  <p-input-group>
+                    <p-floatlabel variant="on">
+                      <input pInputText id="amountEdit" [(ngModel)]="newQuantity" />
+                      <label for="amountEdit">Ilość</label>
+                    </p-floatlabel>
+                    <p-inputgroup-addon>{{selectedUnit}}</p-inputgroup-addon>
+                  </p-input-group>
+                </div>
+                <ng-template #normalView>
+                  {{ ingredient.quantity + ingredient.unit }}
+                </ng-template>
+              </td>
+              <td>
+                <div class="d-flex">
+                  <p-button *ngIf="!isEditing || editingIngredient !== ingredient"
+                            icon="pi pi-pencil"
+                            severity="secondary"
+                            rounded [outlined]="true"
+                            class="me-2"
+                            (onClick)="initEdit(ingredient)" />
+                  <p-button *ngIf="!isEditing || editingIngredient !== ingredient"
+                            icon="pi pi-trash"
+                            severity="danger"
+                            rounded [outlined]="true"
+                            (onClick)="deleteIngredient(ingredient)" />
+                  <p-button *ngIf="isEditing && editingIngredient === ingredient"
+                            icon="pi pi-times"
+                            severity="secondary"
+                            rounded [outlined]="true"
+                            class="me-2"
+                            (onClick)="cancelEdit()" />
+                  <p-button *ngIf="isEditing && editingIngredient === ingredient"
+                            icon="pi pi-check"
+                            severity="success"
+                            rounded [outlined]="true"
+                            (onClick)="saveEdit()" />
+                </div>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+      <div style="display: flex; justify-content: center;" class="mt-4" *ngIf="!(usersIngredients.length > 0)">
+        <h2>Nie posiadasz żadnych składników.</h2>
+      </div>
+    </div>
+  </div>
+</div>
+

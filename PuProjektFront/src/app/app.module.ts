@@ -31,6 +31,15 @@ import {Select} from 'primeng/select';
 import {Checkbox} from 'primeng/checkbox';
 import {DataView} from 'primeng/dataview';
 import {ScrollPanel} from 'primeng/scrollpanel';
+import { IngredientsComponent } from './ingredients/ingredients.component';
+import {Listbox} from 'primeng/listbox';
+import {InputGroup} from 'primeng/inputgroup';
+import {InputGroupAddon} from 'primeng/inputgroupaddon';
+import {TableModule} from 'primeng/table';
+import {ConfirmationService, MessageService} from 'primeng/api';
+import {Toast} from 'primeng/toast';
+import {ConfirmDialog} from 'primeng/confirmdialog';
+import {ConfirmPopup} from 'primeng/confirmpopup';
 
 @NgModule({
   declarations: [
@@ -41,6 +50,7 @@ import {ScrollPanel} from 'primeng/scrollpanel';
     RegisterFormComponent,
     PasswordFormComponent,
     RecipesListComponent,
+    IngredientsComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,10 +79,19 @@ import {ScrollPanel} from 'primeng/scrollpanel';
     Checkbox,
     DataView,
     ScrollPanel,
+    Listbox,
+    InputGroup,
+    InputGroupAddon,
+    TableModule,
+    Toast,
+    ConfirmDialog,
+    ConfirmPopup,
   ],
   providers: [
     provideAnimationsAsync(),
     KnobModule,
+    ConfirmationService,
+    MessageService,
     providePrimeNG({
       theme: {
         preset: Aura

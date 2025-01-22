@@ -1,0 +1,35 @@
+.ingredients-wrapper {
+  background-color: black;
+  width: 90rem;
+  height: auto;
+  padding: 3rem;
+  border-radius: 15px;
+}
+
+.category {
+  color: #a1a1aa;
+}
+
+.p-listbox {
+  width: 100% !important;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.col-lg-2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.table-scrollable {
+  overflow-x: hidden;
+}

@@ -35,6 +35,7 @@ export class RecipesListComponent implements OnInit {
 
   private _getData() {
     this._getAllRecipes();
+    // TODO pobranie kategorii
     this.categories = [
       "Przystawki",
       "Dania główne",
@@ -63,7 +64,6 @@ export class RecipesListComponent implements OnInit {
 
     this._http.get<any>(apiUrl, {headers}).subscribe(res => {
       this.allRecipes = res;
-      console.log(this.allRecipes);
     })
   }
 

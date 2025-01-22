@@ -29,7 +29,7 @@ export class LoginFormComponent {
       response => {
         if (response && response.token) {
           localStorage.setItem('token', response.token);
-          this.router.navigate(['/mainPage']);
+          this.router.navigate(['/recipes']);
           this._toastService.success("Pomyślnie zalogowano!")
 
         } else {

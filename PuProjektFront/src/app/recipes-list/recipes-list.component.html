@@ -14,22 +14,24 @@
             <label for="filterByCategory">Kategoria</label>
           </p-floatlabel>
         </div>
-        <div class="col-lg-3 custom-col" style="align-content: center">
+        <div class="col-lg-3 custom-col d-flex align-items-center">
           <p-checkbox
             formControlName="filterByPossibility"
             id="filterByPossibility"
             [binary]="true"
-            [style]="{'margin-right':'1rem'}">
+            class="me-2">
           </p-checkbox>
-          <label for="filterByPossibility" style="color: #a1a1aa">Możliwe do realizacji</label>
+          <label for="filterByPossibility" class="mb-0" style="color:#a1a1aa; margin-top: 3px">Możliwe do realizacji</label>
         </div>
         <div class="col-lg-3 custom-col">
-          <p-button label="Wyszukaj" type="submit" [style]="{'width':'130%'}" icon="pi pi-search" iconPos="right"  />
+          <p-button label="Wyszukaj" type="submit" [style]="{'width':'130%'}" icon="pi pi-search" iconPos="right" />
         </div>
       </div>
     </form>
   </div>
 </div>
+
+
 
 <div class="recipes-list-wrapper">
   <p-dataView #dv [value]="allRecipes">

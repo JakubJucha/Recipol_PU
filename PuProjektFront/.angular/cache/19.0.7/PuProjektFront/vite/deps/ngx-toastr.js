@@ -4,7 +4,7 @@ import {
   style,
   transition,
   trigger
-} from "./chunk-IXVYIOPU.js";
+} from "./chunk-VRNRRJQU.js";
 import {
   DomSanitizer
 } from "./chunk-CQRWO3VH.js";

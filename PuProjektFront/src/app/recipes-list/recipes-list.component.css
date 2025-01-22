@@ -38,6 +38,8 @@ label {
 .single-recipe {
   background-color: black;
   color: floralwhite !important;
+  border-left: 2px solid transparent !important;
+  border-bottom: 2px solid transparent !important;
 }
 
 .single-recipe:hover {
