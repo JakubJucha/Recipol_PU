@@ -40,6 +40,10 @@ import {ConfirmationService, MessageService} from 'primeng/api';
 import {Toast} from 'primeng/toast';
 import {ConfirmDialog} from 'primeng/confirmdialog';
 import {ConfirmPopup} from 'primeng/confirmpopup';
+import { RecipeDataComponent } from './recipe-data/recipe-data.component';
+import {Dialog} from 'primeng/dialog';
+import {Drawer} from 'primeng/drawer';
+import {SpeedDial} from 'primeng/speeddial';
 
 @NgModule({
   declarations: [
@@ -51,6 +55,7 @@ import {ConfirmPopup} from 'primeng/confirmpopup';
     PasswordFormComponent,
     RecipesListComponent,
     IngredientsComponent,
+    RecipeDataComponent,
   ],
   imports: [
     BrowserModule,
@@ -86,6 +91,9 @@ import {ConfirmPopup} from 'primeng/confirmpopup';
     Toast,
     ConfirmDialog,
     ConfirmPopup,
+    Dialog,
+    Drawer,
+    SpeedDial,
   ],
   providers: [
     provideAnimationsAsync(),

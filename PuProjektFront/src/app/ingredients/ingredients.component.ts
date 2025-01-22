@@ -22,7 +22,10 @@ export class IngredientsComponent implements OnInit {
   editingIngredient: any = null;
   previousQuantity: number | null = null;
   selectedUnit: any | null = null;
-  newQuantity: number | null = null;
+  newQuantity: number | string | null = null;
+
+  visibleConfirmDialog: boolean = false;
+  ingredientToDelete: any = null;
 
   constructor(private _http: HttpClient,
               private _toastrService: ToastrService,
@@ -36,6 +39,12 @@ export class IngredientsComponent implements OnInit {
   private _getData() {
     this._getAllIngredients();
     this._getUsersIngredients();
+  }
+
+  removeNegativeSign(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    this.newQuantity = inputElement.value.replace('-', '');
+    inputElement.value = this.newQuantity;
   }
 
   addIngredient() {
@@ -62,10 +71,13 @@ export class IngredientsComponent implements OnInit {
     })
   }
 
-  deleteIngredient(ingredient: any) {
-    if(confirm("Czy na pewno chcesz usunąć składnik "+ ingredient.name + '?')) {
+  initDeleteIngredient(ingredient: any) {
+    this.ingredientToDelete = ingredient;
+    this.visibleConfirmDialog = true;
+  }
 
-    const apiUrl = `http://localhost:5266/api/user/ingredients/${ingredient.ingredientId}`;
+  deleteIngredient() {
+    const apiUrl = `http://localhost:5266/api/user/ingredients/${this.ingredientToDelete.ingredientId}`;
     const token = localStorage.getItem('token');
     const headers = {
       Authorization: `Bearer ${token}`,
@@ -74,13 +86,14 @@ export class IngredientsComponent implements OnInit {
     this._http.delete(apiUrl, {headers}).subscribe(
       response => {
           this._toastrService.success("Pomyślnie usunięto składnik!")
+          this.visibleConfirmDialog = false;
           this._getUsersIngredients();
       },
       error => {
         this._toastrService.error(error.error, "Błąd podczas usuwania składnika");
       }
     );
-    }
+
   }
 
   initEdit(ingredient: any): void {
@@ -136,7 +149,6 @@ export class IngredientsComponent implements OnInit {
     }
     this._http.get<any>(apiUrl, {headers}).subscribe(res => {
       this.allIngredients = res;
-      console.log(this.allIngredients);
     })
   }
 
@@ -148,7 +160,6 @@ export class IngredientsComponent implements OnInit {
     }
     this._http.get<any>(apiUrl, {headers}).subscribe(res => {
       this.usersIngredients = res;
-      console.log(this.usersIngredients);
     })
   }
 }

@@ -71,13 +71,14 @@ isRegisterMode() {
         this._router.navigate(['/login']);
       },
       error => {
-        this._toastrService.error(error.error, "Błąd podczas rejestracji.")
+        const errorMessage = error.error?.message || 'Wystąpił nieznany błąd.';
+        this._toastrService.error(errorMessage, "Błąd podczas rejestracji.")
       }
     );
   }
 
   cancel() {
-    this._router.navigate(['/profile']);
+    this._router.navigate(['/recipes']);
   }
 
   private _readData() {

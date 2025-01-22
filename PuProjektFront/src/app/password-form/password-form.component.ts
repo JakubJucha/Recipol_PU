@@ -49,7 +49,7 @@ export class PasswordFormComponent {
   }
 
   cancel() {
-    this.router.navigate(['/profile']);
+    this.router.navigate(['/recipes']);
   }
 
   private _passwordMatchValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {

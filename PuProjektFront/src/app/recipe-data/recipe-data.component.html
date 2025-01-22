@@ -1,0 +1,74 @@
+<div class="recipe-data-wrapper">
+  <div class="row">
+
+    <div class="col-md-3 d-flex align-items-center justify-content-center border-right">
+      <img
+        src="assets/images/obiad.png"
+        alt="Zdjęcie przepisu"
+        class="recipe-image"
+      />
+    </div>
+
+    <div class="col-md-9 position-relative">
+      <h1 class="recipe-title">{{recipeData?.name}}</h1>
+      <p class="recipe-description">
+        {{recipeData?.description}}
+      </p>
+      <button type="button" (click)="initImplementRecipe()" pButton pRipple class="recipe-button" >Zrealizuj <i class="pi pi-check"></i></button>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <div class="row">
+    <div class="col-md-3 border-right" style="padding: 1rem">
+      <h3 style="color: floralwhite">Składniki:</h3>
+      <p-scrollPanel [style]="{ width: '100%', height: '25rem' }">
+      <ul class="ingredients-list">
+        <li *ngFor="let ingredient of requiredIngredients">
+          {{ingredient?.name + ' ' + ingredient?.quantity + ingredient?.unit }}
+          <span
+            class="ingredient-available"
+            [ngClass]="{
+          'text-danger': !hasSufficientQuantity(ingredient),
+          'text-success': hasSufficientQuantity(ingredient)
+        }"
+          >
+        Posiadasz: {{
+              getUserIngredientQuantity(ingredient.ingredientId) || 0
+            }} {{ingredient?.unit}}
+      </span>
+        </li>
+      </ul>
+      </p-scrollPanel>
+    </div>
+
+    <div class="col-md-9" style="padding: 1rem">
+      <p-scrollPanel [style]="{ width: '100%', height: '25rem' }">
+      <p class="recipe-details" [innerHTML]="formattedInstructions"></p>
+      </p-scrollPanel>
+    </div>
+  </div>
+</div>
+
+<p-dialog header="Realizacja przepisu" [modal]="true" [(visible)]="visibleConfirmModal" [style]="{ width: '35rem' }">
+  <div class="text-center">
+    <p class="p-text-secondary">Czy chcesz zrealizować ten przepis?</p>
+    <p class="p-text-secondary mb-4">Spowoduje to usunięcie przypisanych mu składników z twojego wyposażenia.</p>
+  </div>
+  <div class="d-flex justify-content-center gap-5">
+    <button type="button" class="p-button-secondary p-button-outlined" pButton pRipple (click)="visibleConfirmModal = false">Anuluj</button>
+    <button type="button" pButton pRipple (click)="implementRecipe()" >Zrealizuj przepis <i class="pi pi-check"></i></button>
+  </div>
+</p-dialog>
+
+<p-dialog header="Realizacja przepisu" [modal]="true" [(visible)]="visibleDangerConfirmModal" [style]="{ width: '35rem' }">
+  <div class="text-center">
+    <p class="p-text-secondary">Nie posiadasz wszystkich wymaganych składników.</p>
+    <p class="p-text-secondary mb-4"> Czy na pewno chcesz zrealizować ten przepis?</p>
+  </div>
+  <div class="d-flex justify-content-center gap-5">
+    <button type="button" class="p-button-secondary p-button-outlined" pButton pRipple (click)="visibleDangerConfirmModal = false">Anuluj</button>
+    <button type="button" pButton pRipple (click)="implementRecipe()" >Zrealizuj przepis <i class="pi pi-check"></i></button>
+  </div>
+</p-dialog>

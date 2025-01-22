@@ -31,9 +31,73 @@
           alt="Avatar"
           class="rounded-circle"
           style=" cursor: pointer;"
-          [routerLink]="'/profile'"
+          (click)="profileVisible = true"
         />
       </div>
     </ng-template>
   </p-menubar>
 </div>
+
+
+<p-drawer [(visible)]="profileVisible" [closable]="false" position="right">
+  <ng-template #header>
+    <div class="flex items-center gap-2">
+      <h4> Dane użytkownika <img
+        ngSrc="assets/images/avatar.png"
+        height="35" width="33"
+        alt="Avatar"
+        class="rounded-circle"
+      /></h4>
+    </div>
+  </ng-template>
+  <div class="row mt-5">
+    <div class="col-lg-6">
+      <h5>Imię</h5>
+    </div>
+    <div class="col-lg-6">
+      <div style="color: #a1a1aa" [innerHTML]="profileData.name"></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+    <h5>Nazwisko</h5>
+    </div>
+    <div class="col-lg-6">
+    <div style="color: #a1a1aa" [innerHTML]="profileData.surname"></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <h5>Adres email</h5>
+    </div>
+    <div class="col-lg-6">
+      <div style="color: #a1a1aa" [innerHTML]="profileData.email"></div>
+    </div>
+  </div>
+  <div class="row mt-5">
+<div class="col-lg-6">
+  <div style="cursor: pointer" (click)="editUserData()"
+       class="d-flex flex-column align-items-center justify-content-between p-2 border rounded w-100">
+    <span class="pi pi-pencil"></span>
+    <span>Edytuj profil</span>
+  </div>
+</div>
+    <div class="col-lg-6">
+      <div style="cursor: pointer" (click)="initChangePassword()"
+           class="d-flex flex-column align-items-center justify-content-between p-2 border rounded w-100">
+        <span class="pi pi-lock"></span>
+        <span>Edytuj hasło</span>
+      </div>
+    </div>
+
+
+
+  </div>
+  <ng-template #footer>
+    <div>
+      <button (click)="logOut()" pButton label="Logout" icon="pi pi-sign-out" class="w-full" severity="danger" text></button>
+    </div>
+  </ng-template>
+</p-drawer>

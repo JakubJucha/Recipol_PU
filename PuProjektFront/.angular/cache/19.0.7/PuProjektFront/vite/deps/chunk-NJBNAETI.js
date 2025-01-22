@@ -3,11 +3,11 @@ import {
 } from "./chunk-5G7WYC4N.js";
 import {
   BaseComponent
-} from "./chunk-7KBA53CY.js";
+} from "./chunk-4GGIPR2M.js";
 import {
   DOCUMENT,
   isPlatformBrowser
-} from "./chunk-NFHW4X2S.js";
+} from "./chunk-H2YQJIJ7.js";
 import {
   Directive,
   ElementRef,
@@ -24,7 +24,7 @@ import {
   ɵɵdefineNgModule,
   ɵɵgetInheritedFactory,
   ɵɵsetNgModuleScope
-} from "./chunk-WIHE3A5V.js";
+} from "./chunk-G3QM5VQQ.js";
 
 // node_modules/primeng/fesm2022/primeng-autofocus.mjs
 var AutoFocus = class _AutoFocus extends BaseComponent {
@@ -136,4 +136,4 @@ var AutoFocusModule = class _AutoFocusModule {
 export {
   AutoFocus
 };
-//# sourceMappingURL=chunk-DWL5LTKZ.js.map
+//# sourceMappingURL=chunk-NJBNAETI.js.map

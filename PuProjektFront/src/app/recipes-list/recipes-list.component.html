@@ -34,13 +34,13 @@
 
 
 <div class="recipes-list-wrapper">
-  <p-dataView #dv [value]="allRecipes">
+  <p-dataView emptyMessage=" " #dv [value]="allRecipes">
     <ng-template #list let-items>
       <div class="container">
-        <div class="row gy-3">
+        <div *ngIf="allRecipes.length > 0" class="row gy-3">
           <p-scrollPanel [style]="{ width: '100%', height: '70vh' }">
           <div class="col-12" *ngFor="let item of items">
-            <div class="card border-0 shadow-sm single-recipe" [routerLink]="'/profile'">
+            <div class="card border-0 shadow-sm single-recipe" [routerLink]="['/recipeData', item.id]">
               <div class="row g-0 align-items-center p-3">
                 <div class="col-md-3">
                   <img
@@ -53,7 +53,8 @@
                 <div class="col-lg-9">
                   <div class="d-flex flex-column justify-content-between h-100">
                     <div>
-                      <span class="text-muted small">{{ item.category }}</span>
+                      <span class="text-muted small">{{ item.category}}</span>
+<!--                      <i class="pi pi-clock">12:00min</i> <i class="pi pi-user">4os</i>-->
                       <h5 class="mt-2">{{ item.name }}</h5>
                     </div>
                     <div class="mt-2">
@@ -66,6 +67,11 @@
             <div style="border-color: #34d399 !important;" class="border-top mt-3 mb-3"></div>
           </div>
           </p-scrollPanel>
+        </div>
+        <div *ngIf="allRecipes.length <= 0">
+          <div style="display: flex; justify-content: center;">
+            <h1>Brak przepisów spełniających kryteria.</h1>
+          </div>
         </div>
       </div>
     </ng-template>

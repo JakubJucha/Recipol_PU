@@ -56,5 +56,7 @@ span {
   color: #a1a1aa !important;
 }
 
-
+.p-dataview-emptymessage {
+  display: none !important;
+}
 

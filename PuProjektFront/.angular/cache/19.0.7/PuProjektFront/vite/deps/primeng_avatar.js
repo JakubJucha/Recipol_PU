@@ -1,17 +1,17 @@
 import {
   BaseComponent
-} from "./chunk-7KBA53CY.js";
+} from "./chunk-4GGIPR2M.js";
 import {
   BaseStyle
-} from "./chunk-6CBHCVVN.js";
+} from "./chunk-IMNIVTG2.js";
 import {
   SharedModule
-} from "./chunk-SEZGN3M5.js";
+} from "./chunk-WHQK5YSC.js";
 import {
   CommonModule,
   NgClass,
   NgIf
-} from "./chunk-NFHW4X2S.js";
+} from "./chunk-H2YQJIJ7.js";
 import {
   ChangeDetectionStrategy,
   Component,
@@ -55,7 +55,7 @@ import {
   ɵɵtemplateRefExtractor,
   ɵɵtext,
   ɵɵtextInterpolate
-} from "./chunk-WIHE3A5V.js";
+} from "./chunk-G3QM5VQQ.js";
 import "./chunk-WDMUDEB6.js";
 
 // node_modules/primeng/fesm2022/primeng-avatar.mjs

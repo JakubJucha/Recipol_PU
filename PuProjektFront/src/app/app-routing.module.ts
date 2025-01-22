@@ -7,6 +7,7 @@ import {ProfileDataResolver} from './resolvers/user-data.resolver';
 import {PasswordFormComponent} from './password-form/password-form.component';
 import {RecipesListComponent} from './recipes-list/recipes-list.component';
 import {IngredientsComponent} from './ingredients/ingredients.component';
+import {RecipeDataComponent} from './recipe-data/recipe-data.component';
 
 const routes: Routes = [
   { path: 'profile',
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'editPassword', component: PasswordFormComponent, },
   { path: 'recipes', component: RecipesListComponent, },
   { path: 'ingredients', component: IngredientsComponent, },
+  { path: 'recipeData/:id', component: RecipeDataComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
 ];
 
