@@ -124,24 +124,109 @@ namespace RecipolApi.Controllers
 
             return Ok(matchingRecipes);
         }
-
-
-        [HttpGet("filter")]
-        public async Task<IActionResult> GetRecipesByIngredients([FromQuery] List<int> ingredientIds)
+        private int GetUserId()
         {
-            var recipes = await _context.Recipes
-                .Where(r => r.RecipeIngredients.Any(ri => ingredientIds.Contains(ri.IngredientId)))
-                .Select(r => new RecipeDto
-                {
-                    Id = r.Id,
-                    Name = r.Name,
-                    Description = r.Description,
-                    Category = r.Category
-                })
+            var userIdClaim = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            if (userIdClaim == null)
+                throw new UnauthorizedAccessException("User ID not found in token.");
+
+            return int.Parse(userIdClaim);
+        }
+
+        [HttpPost("{id}/complete")]
+        public async Task<IActionResult> CompleteRecipe(int id)
+        {
+            var userId = GetUserId();
+
+            var recipe = await _context.Recipes
+                .Include(r => r.RecipeIngredients)
+                .FirstOrDefaultAsync(r => r.Id == id);
+
+            if (recipe == null)
+                return NotFound(new { message = "Recipe not found." });
+
+            var userIngredients = await _context.UserIngredients
+                .Where(ui => ui.UserId == userId)
                 .ToListAsync();
 
-            return Ok(recipes);
+            foreach (var recipeIngredient in recipe.RecipeIngredients)
+            {
+                var userIngredient = userIngredients.FirstOrDefault(ui => ui.IngredientId == recipeIngredient.IngredientId);
+
+                if (userIngredient != null)
+                {
+                    userIngredient.Quantity -= recipeIngredient.Quantity;
+
+                    if (userIngredient.Quantity <= 0)
+                    {
+                        _context.UserIngredients.Remove(userIngredient);
+                    }
+                }     
+            }
+
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Recipe completed and ingredients updated." });
         }
+
+
+        [HttpGet("categories")]
+        public async Task<IActionResult> GetRecipeCategories()
+        {
+            var categories = await _context.Recipes
+                .Select(r => r.Category)
+                .Distinct()
+                .ToListAsync();
+
+            return Ok(categories);
+        }
+
+        [HttpPost("filter")]
+        public async Task<IActionResult> GetFilteredRecipes([FromBody] RecipeFilterDto filterDto)
+        {
+            var query = _context.Recipes.AsQueryable();
+
+            if (!string.IsNullOrEmpty(filterDto.FilterByCategory))
+            {
+                query = query.Where(r => r.Category == filterDto.FilterByCategory);
+            }
+
+            if (!string.IsNullOrEmpty(filterDto.FilterByName))
+            {
+                query = query.Where(r => r.Name.Contains(filterDto.FilterByName));
+            }
+
+       
+            var recipes = await query
+                .Include(r => r.RecipeIngredients)
+                .ToListAsync();
+
+            if (filterDto.FilterByPossibility)
+            {
+                var userId = GetUserId();
+
+                var userIngredients = await _context.UserIngredients
+                    .Where(ui => ui.UserId == userId)
+                    .ToListAsync();
+
+                recipes = recipes.Where(recipe =>
+                    recipe.RecipeIngredients.All(ri =>
+                        userIngredients.Any(ui => ui.IngredientId == ri.IngredientId && ui.Quantity >= ri.Quantity)))
+                    .ToList();
+            }
+ 
+            var result = recipes.Select(r => new RecipeDto
+            {
+                Id = r.Id,
+                Name = r.Name,
+                Description = r.Description,
+                Category = r.Category
+            }).ToList();
+
+            return Ok(result);
+        }
+
+
     }
 
 }
