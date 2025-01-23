@@ -3,14 +3,17 @@
 
     <div class="col-md-3 d-flex align-items-center justify-content-center border-right">
       <img
-        src="assets/images/obiad.png"
+        [src]="recipeData?.photo"
         alt="Zdjęcie przepisu"
         class="recipe-image"
       />
     </div>
 
     <div class="col-md-9 position-relative">
-      <h1 class="recipe-title">{{recipeData?.name}}</h1>
+      <h1 class="recipe-title">{{recipeData?.name}} <small style="color: #a1a1aa; font-size: 20px">
+        <i class="pi pi-clock pe-2" style="font-size: 15px; color: #a1a1aa"></i><span class="pe-2">{{ recipeData.cookingTime}}</span>
+        <i class="pi pi-user pe-2" style="font-size: 15px; color: #a1a1aa"></i><span class="ml-2">{{ recipeData.servings }}</span>
+      </small></h1>
       <p class="recipe-description">
         {{recipeData?.description}}
       </p>
