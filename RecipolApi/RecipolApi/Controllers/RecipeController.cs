@@ -25,7 +25,10 @@ namespace RecipolApi.Controllers
                     Id = r.Id,
                     Name = r.Name,
                     Description = r.Description,
-                    Category = r.Category
+                    Category = r.Category,
+                    CookingTime = r.CookingTime,
+                    Servings = r.Servings,
+                    Photo = r.Photo
                 })
                 .ToListAsync();
 
@@ -72,6 +75,9 @@ namespace RecipolApi.Controllers
                 recipe.Description,
                 recipe.Instructions,
                 recipe.Category,
+                recipe.CookingTime, 
+                recipe.Servings, 
+                recipe.Photo, 
                 Ingredients = recipe.RecipeIngredients.Select(ri => new
                 {
                     ri.IngredientId,
@@ -220,7 +226,10 @@ namespace RecipolApi.Controllers
                 Id = r.Id,
                 Name = r.Name,
                 Description = r.Description,
-                Category = r.Category
+                Category = r.Category,
+                CookingTime = r.CookingTime, 
+                Servings = r.Servings, 
+                Photo = r.Photo 
             }).ToList();
 
             return Ok(result);
